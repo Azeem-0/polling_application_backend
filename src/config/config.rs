@@ -7,9 +7,7 @@ use serde::Deserialize;
 pub struct AppConfig {
     pub mongodb_uri: String,
     pub database_name: String,
-    pub rp_id: String,
-    pub rp_name: String,
-    pub rp_origin_url: String,
+    pub jwt_secret: String,
 }
 
 impl Default for AppConfig {
@@ -19,11 +17,8 @@ impl Default for AppConfig {
                 .unwrap_or_else(|_| "mongodb://localhost:27017".to_string()),
             database_name: env::var("DATABASE_NAME")
                 .unwrap_or_else(|_| "polling_application".to_string()),
-            rp_origin_url: env::var("RP_ORIGIN")
-                .unwrap_or_else(|_| "http://localhost:8080".to_string()),
-            rp_name: env::var("RP_NAME")
-                .unwrap_or_else(|_| "Passkey Authentication Demo".to_string()),
-            rp_id: env::var("RP_ID").unwrap_or_else(|_| "localhost".to_string()),
+            jwt_secret: env::var("JWT_SECRET")
+                .unwrap_or_else(|_| "whatmightbeyoursecret".to_string()),
         }
     }
 }
